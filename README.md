@@ -10,7 +10,9 @@ Player tries to guess a random word by suggesting letters within a certain numbe
 
 In `terminal` or `cmd`
 
-`ruby hangman.rb`
+```
+ruby hangman.rb
+```
 
 ### Adding a new word to guess
 
