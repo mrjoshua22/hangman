@@ -8,19 +8,30 @@ class ConsoleInterface
     @game = game
   end
 
-  def print_out
-    puts <<~PRINT
-      Слово: #{word_to_show}
-      #{figure}
-      Ошибки (#{@game.errors_made}): #{errors_to_show}
+  def colorized_game_state
+    word_string = "Слово: #{word_to_show}".colorize(:light_blue)
+    
+    errors_string =
+      "Ошибки (#{@game.errors_made}): #{errors_to_show}".colorize(:red)
+
+    colorized_state = 
+      <<~PRINT
+      #{word_string}
+      #{figure.colorize(:yellow)}
+      #{errors_string}
       У вас осталось ошибок: #{@game.errors_allowed}
 
-    PRINT
+      PRINT
+  end
+
+  def print_out
+    puts colorized_game_state
 
     if @game.won?
-      puts 'Поздравляем, вы выиграли!'
+      puts 'Поздравляем, вы выиграли!'.colorize(:green)
     elsif @game.lost?
-      puts "Вы проиграли, загаданное слово: #{@game.word}"
+      puts "Вы проиграли, загаданное слово: " \
+        "#{@game.word}".colorize(:red)
     end
   end
 
